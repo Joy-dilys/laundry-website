@@ -14,7 +14,7 @@
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">LaundryPro</div>
-    <div class="menu-toggle">☰</div>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
     <ul class="nav-links">
       {% if current_user.is_authenticated %}
     <li><a href="/">Home</a></li>
@@ -39,5 +39,11 @@
   </header>
 
    <script src="{{ url_for('static', filename='js/script.js') }}?v=2"></script>
+   <script>
+function toggleMenu() {
+  var navLinks = document.querySelector('.nav-links');
+  navLinks.classList.toggle('active');
+}
+</script>
 </body>
 </html>
