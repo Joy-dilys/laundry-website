@@ -5,24 +5,27 @@
   <title>Laundry Service - Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
- 
-</body>
-
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
-  
+<body>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="logo">LaundryPro</div>
-    <div class="menu-toggle" id="menu-toggle">☰</div>
-    <ul class="nav-links">
-      {% if current_user.is_authenticated %}
-    <li><a href="/">Home</a></li>
-    <li><a href="/services">Services</a></li>
-    <li><a href="/pricing">Pricing</a></li>
-    <li><a href="/booking">Booking</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/contact">Contact</a></li>
+
+<div id="loader-wrapper">
+  <div id="loader"></div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="logo">LaundryPro</div>
+  <div class="menu-toggle" id="menu-toggle">☰</div>
+  <ul class="nav-links">
+    {% if current_user.is_authenticated %}
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/booking">Booking</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
       <li><a href="/dashboard">Dashboard</a></li>
       <li><a href="/logout">Logout</a></li>
     {% else %}
@@ -32,18 +35,37 @@
   </ul>
 </nav>
 
-  <!-- Page Content -->
-  <header>
-    <h1>Welcome to Our Laundry Service</h1>
+<!-- Hero Section with Animation -->
+<header class="hero-section">
+  <div class="container" data-aos="zoom-in">
+    <h1>Clean clothes, happy life</h1>
     <p>We pick up, clean, and deliver your laundry!</p>
-  </header>
+  </div>
 
-   <script src="{{ url_for('static', filename='js/script.js') }}?v=2"></script>
-   <script>
-function toggleMenu() {
-  var navLinks = document.querySelector('.nav-links');
-  navLinks.classList.toggle('active');
-}
+  <div class="banner-image" data-aos="zoom-in">
+    <img src="/static/images/laundry-banner.jpeg" alt="Laundry Service">
+  </div>
+  <!-- Real image animation (appears after laundry banner) -->
+<section class="real-image-section" data-aos="zoom-out" data-aos-delay="500">
+  <img src="{{ url_for('static', filename='images/my_real_image.jpg') }}" alt="Real Laundry Work">
+</section>
+
+</header>
+
+<!-- Scripts -->
+<script src="{{ url_for('static', filename='js/script.js') }}?v=2"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+  function toggleMenu() {
+    var navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active');
+  }
+
+  window.addEventListener("load", () => {
+    document.getElementById("loader-wrapper").style.display = "none";
+  });
 </script>
+
 </body>
 </html>

@@ -1,0 +1,80 @@
+<!-- templates/admin_manage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+
+  <h2>Users</h2>
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Is Admin</th>
+      <th>Action</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ 'Yes' if user.is_admin else 'No' }}</td>
+      <td>
+        {% if not user.is_admin %}
+        <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}">
+          <button type="submit" onclick="return confirm('Delete this user?')">Delete</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>Bookings</h2>
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Phone</th>
+      <th>Service</th>
+      <th>Address</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    {% for booking in bookings %}
+    <tr>
+      <td>{{ booking.id }}</td>
+     <td>{{ booking.user.username if booking.user else 'N/A' }}</td>
+      <td>{{ booking.phone }}</td>
+      <td>{{ booking.service }}</td>
+      <td>{{ booking.address }}</td>
+      <td>{{ booking.date.strftime('%Y-%m-%d') }}</td>
+      <td>{{ booking.time.strftime('%H:%M') }}</td>
+      <td>{{ booking.status }}</td>
+      <td>
+        {% if booking.status != 'Confirmed' %}
+        <form method="POST" action="{{ url_for('update_booking_status', booking_id=booking.id) }}" style="display:inline;">
+          <input type="hidden" name="status" value="Confirmed">
+          <button type="submit">Confirm</button>
+        </form>
+        {% endif %}
+        {% if booking.status != 'Cancelled' %}
+        <form method="POST" action="{{ url_for('update_booking_status', booking_id=booking.id) }}" style="display:inline;">
+          <input type="hidden" name="status" value="Cancelled">
+          <button type="submit">Cancel</button>
+        </form>
+        {% endif %}
+        <form method="POST" action="{{ url_for('delete_booking', booking_id=booking.id) }}" style="display:inline;">
+          <button type="submit" onclick="return confirm('Delete this booking?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

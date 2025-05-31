@@ -1,0 +1,48 @@
+<h1>Admin Dashboard</h1>
+
+<h2>All Bookings</h2>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>User</th>
+    <th>Service</th>
+    <th>Phone</th>
+    <th>Address</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  {% for booking in bookings %}
+  <tr>
+    <td>{{ booking.id }}</td>
+    <td>{{ booking.user.username }}</td>
+    <td>{{ booking.service }}</td>
+    <td>{{ booking.phone }}</td>
+    <td>{{ booking.address }}</td>
+    <td>{{ booking.date }}</td>
+    <td>{{ booking.time }}</td>
+    <td>{{ booking.status }}</td>
+    <td>
+      <form method="post" action="{{ url_for('update_booking_status', booking_id=booking.id) }}">
+        <select name="status">
+          <option value="Pending" {% if booking.status == 'Pending' %}selected{% endif %}>Pending</option>
+          <option value="Confirmed" {% if booking.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+          <option value="Cancelled" {% if booking.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+        </select>
+        <button type="submit">Update</button>
+      </form>
+      <form method="post" action="{{ url_for('delete_booking', booking_id=booking.id) }}" onsubmit="return confirm('Are you sure?');">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Registered Users</h2>
+<ul>
+  {% for user in users %}
+    <li>{{ user.username }}{% if user.is_admin %} (Admin){% endif %}</li>
+  {% endfor %}
+</ul>
