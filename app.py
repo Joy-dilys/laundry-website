@@ -14,7 +14,6 @@ login_manager.login_view = 'login'
 
 
 @app.route('/')
-@login_required
 def home():
     return render_template('index.html')
 
