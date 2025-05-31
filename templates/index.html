@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Laundry Service - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">LaundryPro</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul class="nav-links">
+      {% if current_user.is_authenticated %}
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('booking') }}">Book a Service</a></li>
+      <li><a href="{{ url_for('pricing') }}">View Pricing</a></li>
+      <li><a href="{{ url_for('services') }}">Our Services</a></li>
+      <li><a href="{{ url_for('about') }}">About Us</a></li>
+      <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      <li><a href="{{ url_for('admin_dashboard') }}">Admin center></a></li>
+    {% else %}
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+    {% endif %}
+    </ul>
+  </nav>
+
+  <!-- Page Content -->
+  <header>
+    <h1>Welcome to Our Laundry Service</h1>
+    <p>We pick up, clean, and deliver your laundry!</p>
+  </header>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

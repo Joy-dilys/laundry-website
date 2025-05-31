@@ -1,0 +1,25 @@
+<h2>Admin Dashboard</h2>
+<table border="1">
+  <tr>
+    <th>Name</th><th>Email</th><th>Service</th><th>Date</th><th>Time</th>
+  </tr>
+  {% for booking in bookings %}
+  <tr>
+    <td>{{ booking.name }}</td>
+    <td>{{ booking.email }}</td>
+    <td>{{ booking.service }}</td>
+    <td>{{ booking.date }}</td>
+    <td>{{ booking.time }}</td>
+     <td>{{ booking.status }}</td>
+    <td>
+      {% if booking.status != 'Done' %}
+        <form method="POST" action="{{ url_for('mark_done', booking_id=booking.id) }}">
+          <button type="submit">Mark as Done</button>
+        </form>
+      {% else %}
+        ✅
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
