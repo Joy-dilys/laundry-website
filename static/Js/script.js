@@ -7,12 +7,4 @@ document.addEventListener('DOMContentLoaded', () => {
       navLinks.classList.toggle('active');
     });
   }
-
-  const darkModeButton = document.querySelector('.dark-mode-button');
-  if (darkModeButton) {
-    darkModeButton.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      darkModeButton.classList.toggle('active');
-    });
-  }
 });

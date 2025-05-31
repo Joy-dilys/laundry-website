@@ -5,6 +5,9 @@
   <title>Laundry Service - Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+ 
+</body>
+
 </head>
 <body>
   
@@ -12,7 +15,7 @@
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">LaundryPro</div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu-toggle">☰</div>
     <ul class="nav-links">
       {% if current_user.is_authenticated %}
     <li><a href="/">Home</a></li>
@@ -36,6 +39,6 @@
     <p>We pick up, clean, and deliver your laundry!</p>
   </header>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/script.js') }}?v=2"></script>
 </body>
 </html>
