@@ -37,7 +37,7 @@ input, select {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #040101;
   border-radius: 4px;
 }
 
@@ -109,15 +109,22 @@ button:hover {
     position: absolute;
     top: 60px;
     right: 0;
-    width: 200px;
-    padding: 1rem;
+    width: 100%;
+    padding: 1rem 0;
     border-radius: 0 0 8px 8px;
+    z-index: 1000;
   }
 
-  .nav-links.show {
+  .nav-links.active {  /* make sure JS toggles this 'active' class */
     display: flex;
   }
+
+  .nav-links li {
+    text-align: center;
+    margin: 10px 0;
+  }
 }
+
 
 header {
   padding: 2rem;
@@ -178,4 +185,9 @@ header {
   display: block;
   margin: 20px auto;
   border-radius: 10px;
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
 }

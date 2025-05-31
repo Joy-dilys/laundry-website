@@ -9,7 +9,7 @@
 </head>
 <body>
 
-
+<!-- Loader -->
 <div id="loader-wrapper">
   <div id="loader"></div>
 </div>
@@ -18,7 +18,7 @@
 <nav class="navbar">
   <div class="logo">LaundryPro</div>
   <div class="menu-toggle" id="menu-toggle">☰</div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     {% if current_user.is_authenticated %}
       <li><a href="/">Home</a></li>
       <li><a href="/services">Services</a></li>
@@ -42,26 +42,26 @@
     <p>We pick up, clean, and deliver your laundry!</p>
   </div>
 
-  <div class="banner-image" data-aos="zoom-in">
-    <img src="/static/images/laundry-banner.jpeg" alt="Laundry Service">
-  </div>
-  <!-- Real image animation (appears after laundry banner) -->
-<section class="real-image-section" data-aos="zoom-out" data-aos-delay="500">
-  <img src="{{ url_for('static', filename='images/my_real_image.jpg') }}" alt="Real Laundry Work">
-</section>
+ 
 
+  <!-- Real image animation -->
+  <section class="real-image-section" data-aos="zoom-out" data-aos-delay="500">
+    <img src="{{ url_for('static', filename='images/my_real_image.jpeg') }}" alt="Real Laundry Work">
+  </section>
 </header>
 
 <!-- Scripts -->
-<script src="{{ url_for('static', filename='js/script.js') }}?v=2"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
   AOS.init();
-  function toggleMenu() {
-    var navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('active');
-  }
 
+  // Mobile menu toggle
+  document.getElementById("menu-toggle").addEventListener("click", function () {
+    document.getElementById("nav-links").classList.toggle("active");
+  });
+
+  // Hide loader after page loads
   window.addEventListener("load", () => {
     document.getElementById("loader-wrapper").style.display = "none";
   });
