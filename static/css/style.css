@@ -67,12 +67,7 @@ button:hover {
   min-height: 60px;
 }
 
-/* Logo in center (especially on small screens) */
-.logo-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
+
 
 .logo {
   font-size: 24px;
@@ -84,18 +79,11 @@ button:hover {
 
 /* Menu toggle button */
 .menu-toggle {
-  display: block; /* Always visible */
+  display: block !important; /* Always visible */
   font-size: 1.8rem;
   color: white;
   cursor: pointer;
   order: 1;
-}
-
-/* Navigation links */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.2rem;
 }
 
 .nav-links li a {
@@ -112,7 +100,8 @@ button:hover {
 /* Responsive styles */
 @media (max-width: 768px) {
   .menu-toggle {
-    display: block;
+    display: block !important; /* Always viible */
+    order: 2; 
   }
 }
 
@@ -129,6 +118,7 @@ button:hover {
     z-index: 1000;
     margin: 0;
     list-style: none;
+    gap: 1.2rem;
   }
 
   .nav-links.active {
