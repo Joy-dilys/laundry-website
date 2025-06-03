@@ -114,7 +114,7 @@ button:hover {
   .menu-toggle {
     display: block;
   }
-  
+}
 
   .nav-links {
     display: none; /* Hide links by default */
