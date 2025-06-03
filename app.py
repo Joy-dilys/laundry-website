@@ -14,7 +14,7 @@ login_manager = LoginManager(app)
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# Admin decorator to protect admin routes
+
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -29,19 +29,19 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)  # Added admin role field
+    is_admin = db.Column(db.Boolean, default=False)  
 
-    bookings = db.relationship('Booking', backref='user', lazy=True)  # Relationship to bookings
+    bookings = db.relationship('Booking', backref='user', lazy=True)  
 
 
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Link to user
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
     phone = db.Column(db.String(15))
     address = db.Column(db.String(250))
     service = db.Column(db.String(100))
-    date = db.Column(db.Date)  # Use Date for booking date
-    time = db.Column(db.Time)  # Use Time for booking time
+    date = db.Column(db.Date)  
+    time = db.Column(db.Time)  
     status = db.Column(db.String(50), default='Pending')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -66,7 +66,7 @@ def register():
             flash("Username already exists!")
             return redirect(url_for('register'))
 
-        # Make first registered user an admin (optional)
+        
         is_admin = False
         if User.query.count() == 0:
             is_admin = True
@@ -105,7 +105,6 @@ def logout():
 
 
 @app.route('/dashboard')
-@login_required
 def dashboard():
     if current_user.is_admin:
         bookings = Booking.query.order_by(Booking.created_at.desc()).all()
@@ -117,7 +116,7 @@ def dashboard():
 
 
 @app.route('/booking', methods=['GET', 'POST'])
-@login_required  # Only logged-in users can book
+@login_required  
 def booking():
     if request.method == 'POST':
         phone = request.form['phone']
@@ -126,7 +125,7 @@ def booking():
         time_str = request.form['time']
         address = request.form['address']
 
-        # Convert strings to datetime objects
+        
         try:
             date = datetime.strptime(date_str, '%Y-%m-%d').date()
             time = datetime.strptime(time_str, '%H:%M').time()
@@ -256,7 +255,17 @@ def admin_delete_booking(booking_id):
     flash(f"Booking for {booking.name} deleted.")
     return redirect(url_for('admin_manage'))
 
-
+@app.route('/admin/booking/<int:booking_id>/done', methods=['POST'])
+@login_required
+def mark_done(booking_id):
+    if not current_user.is_admin:
+        flash("Access denied.")
+        return redirect(url_for('admin_manage'))
+    booking = Booking.query.get_or_404(booking_id)
+    booking.status = 'Done'
+    db.session.commit()
+    flash("Booking marked as done.")
+    return redirect(url_for('admin_manage'))
 
 if __name__ == '__main__':
     with app.app_context():

@@ -16,9 +16,11 @@
 
 <!-- Navigation Bar -->
 <nav class="navbar">
+  <div class="logo-container"></div>
   <div class="logo">LaundryPro</div>
   <div class="menu-toggle" id="menu-toggle">☰</div>
-  <ul class="nav-links" id="nav-links">
+  <ul class="nav-links">
+    <li class="nav-item"><a href="/">Home</a></li>
     {% if current_user.is_authenticated %}
       <li><a href="/">Home</a></li>
       <li><a href="/services">Services</a></li>
@@ -34,6 +36,7 @@
     {% endif %}
   </ul>
 </nav>
+
 
 <!-- Hero Section with Animation -->
 <header class="hero-section">
@@ -66,6 +69,14 @@
     document.getElementById("loader-wrapper").style.display = "none";
   });
 </script>
+
+<section class="video-section" data-aos="fade-up">
+  <h2>Welcome to Saints Empires Laundry Service</h2>
+  <video autoplay muted loop playsinline width="100%" style="max-width: 800px; display: block; margin: 0 auto;">
+    <source src="{{ url_for('static', filename='videos/laundry_demo.mp4') }}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</section>
 
 </body>
 </html>

@@ -24,7 +24,7 @@ form {
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 label {
@@ -33,7 +33,8 @@ label {
   font-weight: bold;
 }
 
-input, select {
+input,
+select {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
@@ -55,23 +56,43 @@ button:hover {
   background-color: #2980b9;
 }
 
-/* Navbar styling */
+/* Navbar Styling */
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   background: #3498db;
   padding: 10px 20px;
-  color: white;
   position: relative;
+  flex-wrap: wrap;
 }
 
-.navbar .logo {
+/* Logo in center (especially on small screens) */
+.logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
   font-size: 24px;
   font-weight: bold;
   color: white;
+  text-align: center;
 }
 
+/* Menu toggle button */
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+
+/* Navigation links */
 .nav-links {
   list-style: none;
   display: flex;
@@ -89,13 +110,6 @@ button:hover {
   color: #ffdd57;
 }
 
-.menu-toggle {
-  display: none;
-  font-size: 1.8rem;
-  color: white;
-  cursor: pointer;
-}
-
 /* Responsive styles */
 @media (max-width: 768px) {
   .menu-toggle {
@@ -103,19 +117,24 @@ button:hover {
   }
 
   .nav-links {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
     flex-direction: column;
     background-color: #0A74DA;
     position: absolute;
+    padding: 0;
+    margin: 0;
     top: 60px;
     right: 0;
-    width: 100%;
+    width: 200px;
     padding: 1rem 0;
     border-radius: 0 0 8px 8px;
     z-index: 1000;
   }
 
-  .nav-links.active {  /* make sure JS toggles this 'active' class */
+  .nav-links.active {
     display: flex;
   }
 
@@ -123,13 +142,15 @@ button:hover {
     text-align: center;
     margin: 10px 0;
   }
+
+  .logo-container {
+    width: 100%;
+    justify-content: center;
+    margin-top: 5px;
+  }
 }
 
-
-header {
-  padding: 2rem;
-  text-align: center;
-}
+/* Loader Styles */
 .loader-wrapper {
   position: fixed;
   width: 100%;
@@ -155,6 +176,8 @@ header {
     transform: rotate(360deg);
   }
 }
+
+/* Hero section */
 .hero-section {
   text-align: center;
   padding: 80px 20px;
@@ -178,6 +201,7 @@ header {
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
+
 .animated-image {
   width: 100%;
   max-width: 800px;
@@ -186,8 +210,60 @@ header {
   margin: 20px auto;
   border-radius: 10px;
 }
+
 .container {
   max-width: 1200px;
   margin: auto;
   padding: 0 20px;
+}
+.center-links {
+  justify-content: center !important;
+}
+.center-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+.center-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.center-form label,
+.center-form input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.video-section {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.video-section h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #2c3e50;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
