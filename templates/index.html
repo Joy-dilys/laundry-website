@@ -22,7 +22,6 @@
   <ul class="nav-links" id="nav-links">
     <li class="nav-item"><a href="/">Home</a></li>
     {% if current_user.is_authenticated %}
-      <li><a href="/">Home</a></li>
       <li><a href="/services">Services</a></li>
       <li><a href="/pricing">Pricing</a></li>
       <li><a href="/booking">Booking</a></li>
@@ -60,13 +59,15 @@
   AOS.init();
 
   // Mobile menu toggle
-  document.getElementById("menu-toggle").addEventListener("click", function () {
+  document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("menu-toggle").addEventListener("click", function (){ 
     document.getElementById("nav-links").classList.toggle("active");
   });
 
   // Hide loader after page loads
   window.addEventListener("load", () => {
     document.getElementById("loader-wrapper").style.display = "none";
+  });
   });
 </script>
 
